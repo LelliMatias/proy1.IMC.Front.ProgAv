@@ -1,30 +1,113 @@
-# React + TypeScript + Vite
+# Proyecto NestJS + React con Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Las tecnologias que utilizamos brindadas por la catedra son: **NestJS** en el backend y **React con Vite** en el frontend. 
+---
 
-Currently, two official plugins are available:
+## Tecnologías utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Backend:** NestJS, TypeScript
+- **Frontend:** React, Vite, TypeScript
+- **Testing:** Jest (para pruebas unitarias)
+- **Gestión de dependencias:** npm / yarn
+- **Base de datos:** (Postgres 1era parte)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Estructura del proyecto
 
-- Configure the top-level `parserOptions` property like this:
+```text
+.
+├── 2025_proyecto1_back_imc/          # BACKEND
+│   ├── src/
+│   │   ├── app.controller.ts
+│   │   ├── app.service.ts
+│   │   ├── app.module.ts
+│   │   └── module/imc/
+│   │   └── app.controller.spec.ts
+│   │   └── app.service.spec.ts
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+├── 2025_proyecto1_front_imc/         # FRONTEND
+│   ├── src/
+│   └── ...
+├── package.json
+└── README.md
+
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+# Configuración del Proyecto NestJS + React (Vite)
+
+Instrucciones para la configuracion del proyecto
+---
+
+## Backend (NestJS)
+
+### 1. Instalar dependencias
+
+```bash
+cd backend
+npm install
+# o
+yarn install
+
+
+```
+### 2. Ejecutar en modo desarrollador
+```bash
+npm run start:dev
+# o
+yarn start:dev
+
+```
+El backend correrá en http://localhost:3000.
+### 3. Ejecutar pruebas unitarias
+```bash
+npm run test
+# o
+yarn test
+```
+
+## Frontend (React + Vite)
+### 1. Instalar dependencias
+```bash
+cd frontend
+npm install
+# o
+yarn install
+```
+### 2. Ejecutar en modo desarrollador
+```bash
+npm run dev
+# o
+yarn dev
+```
+El frontend correrá en http://localhost:5173.
+
+## Despliegue
+### 1. Construimos el backend
+```bash
+cd backend
+npm run build
+# o
+yarn build
+```
+### 2. Desplegamos el backend
+```bash
+npm run start
+# o
+yarn start
+```
+### 3. Construimos el frontend
+```bash
+cd frontend
+npm run build
+# o
+yarn build
+```
+
+### 4. Desplegamos el frontend
+```bash
+npm run dev
+# o
+yarn dev
+```
+
