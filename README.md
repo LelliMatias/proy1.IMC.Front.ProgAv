@@ -1,6 +1,6 @@
 # Proyecto NestJS + React con Vite
 
-Las tecnologias que utilizamos brindadas por la catedra son: **NestJS** en el backend y **React con Vite** en el frontend. 
+Las tecnologias que utilizamos brindadas por la catedra son: **NestJS** en el backend y **React con Vite** en el frontend. Este documento es una guia para poder poner en funcionamiento el **frontend**
 ---
 
 ## Tecnologías utilizadas
@@ -16,15 +16,6 @@ Las tecnologias que utilizamos brindadas por la catedra son: **NestJS** en el ba
 ## Estructura del proyecto
 
 ```text
-.
-├── 2025_proyecto1_back_imc/          # BACKEND
-│   ├── src/
-│   │   ├── app.controller.ts
-│   │   ├── app.service.ts
-│   │   ├── app.module.ts
-│   │   └── module/imc/
-│   │   └── app.controller.spec.ts
-│   │   └── app.service.spec.ts
 
 ├── 2025_proyecto1_front_imc/         # FRONTEND
 │   ├── src/
@@ -38,34 +29,6 @@ Las tecnologias que utilizamos brindadas por la catedra son: **NestJS** en el ba
 
 Instrucciones para la configuracion del proyecto
 ---
-
-## Backend (NestJS)
-
-### 1. Instalar dependencias
-
-```bash
-cd backend
-npm install
-# o
-yarn install
-
-
-```
-### 2. Ejecutar en modo desarrollador
-```bash
-npm run start:dev
-# o
-yarn start:dev
-
-```
-El backend correrá en http://localhost:3000.
-### 3. Ejecutar pruebas unitarias
-```bash
-npm run test
-# o
-yarn test
-```
-
 ## Frontend (React + Vite)
 ### 1. Instalar dependencias
 ```bash
@@ -83,20 +46,7 @@ yarn dev
 El frontend correrá en http://localhost:5173.
 
 ## Despliegue
-### 1. Construimos el backend
-```bash
-cd backend
-npm run build
-# o
-yarn build
-```
-### 2. Desplegamos el backend
-```bash
-npm run start
-# o
-yarn start
-```
-### 3. Construimos el frontend
+### 1. Construimos el frontend
 ```bash
 cd frontend
 npm run build
@@ -104,10 +54,17 @@ npm run build
 yarn build
 ```
 
-### 4. Desplegamos el frontend
+### 2. Desplegamos el frontend
 ```bash
 npm run dev
 # o
 yarn dev
 ```
 
+### Posibles Issues
+| Issue                                      | Causa                                                      | Solución                                                                                                               |
+| ------------------------------------------ | ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| **Errores de dependencias faltantes**      | Node\_modules no instalados o versión incompatible de Node | Ejecutar `npm install` o `yarn install`; usar Node 20+                                                                 |
+| **Frontend no se conecta al backend**      | URL o puerto incorrecto                                    | Verificar que el backend esté corriendo en el puerto correcto y que la URL usada en fetch/axios coincida               |
+| **Problemas al construir para producción** | Cache corrupta o dependencias obsoletas                    | Ejecutar `rm -rf node_modules dist && npm install && npm run build`                                                    |
+| **Errores de CORS**                        | Requests a backend desde otro puerto sin CORS              | Asegurarse que el backend tenga CORS habilitado                                                                        |
