@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { API_URL } from "./config/api"; // Importar la configuración
 
 interface ImcResult {
   imc: number;
@@ -25,7 +26,8 @@ function ImcForm() {
     }
 
     try {
-      const response = await axios.post("http://localhost:3000/imc/calcular", {
+      // Usar API_URL en lugar de localhost hardcodeado
+      const response = await axios.post(`${API_URL}/imc/calcular`, {
         altura: alturaNum,
         peso: pesoNum,
       });
@@ -33,7 +35,7 @@ function ImcForm() {
       setError("");
     } catch (err) {
       setError(
-        "Error al calcular el IMC. Verifica si el backend está corriendo."
+        "Error al calcular el IMC. Verifica la conexión con el servidor."
       );
       setResultado(null);
     }
@@ -81,7 +83,6 @@ function ImcForm() {
           </div>
         )}
       </div>
-
     </div>
   );
 }
