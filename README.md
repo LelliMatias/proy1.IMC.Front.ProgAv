@@ -68,3 +68,14 @@ yarn dev
 | **Frontend no se conecta al backend**      | URL o puerto incorrecto                                    | Verificar que el backend esté corriendo en el puerto correcto y que la URL usada en fetch/axios coincida               |
 | **Problemas al construir para producción** | Cache corrupta o dependencias obsoletas                    | Ejecutar `rm -rf node_modules dist && npm install && npm run build`                                                    |
 | **Errores de CORS**                        | Requests a backend desde otro puerto sin CORS              | Asegurarse que el backend tenga CORS habilitado                                                                        |
+
+### Casos de Prueba con Gherkin
+
+Este archivo especifica documentacion que sirve como especificacion y como base para la comprension
+de las pruebas automatizadas.
+
+```
+├── 2025_proyecto1_front_imc/        
+│   ├── src/
+│   │   ├── ImcForm.feature
+```

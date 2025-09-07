@@ -45,8 +45,9 @@ function ImcForm() {
         <h1>Calculadora de IMC</h1>
         <form onSubmit={handleSubmit}>
           <div>
-            <label>Altura (m):</label>
+            <label htmlFor="altura">Altura (m):</label>
             <input
+              id="altura"
               type="number"
               value={altura}
               onChange={(e) => setAltura(e.target.value)}
@@ -55,8 +56,9 @@ function ImcForm() {
             />
           </div>
           <div>
-            <label>Peso (kg):</label>
+            <label htmlFor="peso">Peso (kg):</label>
             <input
+              id="peso"
               type="number"
               value={peso}
               onChange={(e) => setPeso(e.target.value)}
@@ -79,7 +81,7 @@ function ImcForm() {
           </div>
         )}
       </div>
-      
+
     </div>
   );
 }
