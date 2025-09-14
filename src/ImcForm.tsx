@@ -1,37 +1,47 @@
-import axios from "axios";
-import React, { useState } from "react";
 import { API_URL } from "./config/api"; // Importar la configuración
+import { HttpApadter } from "./api/axios.adapter";
+import React, { useState } from "react";
+import { validateImcInputs, ValidationResult } from "./utils/validation";  // Importa el módulo de validación (ajusta la ruta si es necesario)
 
 interface ImcResult {
   imc: number;
   categoria: string;
 }
 
-function ImcForm() {
-  const [altura, setAltura] = useState("");
-  const [peso, setPeso] = useState("");
+interface ImcFormProps {
+  api: HttpApadter;
+}
+
+function ImcForm({ api }: ImcFormProps) {
+
+  const [altura, setAltura] = useState<string>("");  
+  const [peso, setPeso] = useState<string>("");
   const [resultado, setResultado] = useState<ImcResult | null>(null);
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string>("");
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");  
+    setResultado(null);
+
+    const validation: ValidationResult = validateImcInputs(altura, peso); // valido los valores con el helper validation.ts
+    if (!validation.isValid) {
+      setError(validation.error || "Error en la validación.");
+      return;  
+    }
 
     const alturaNum = parseFloat(altura);
     const pesoNum = parseFloat(peso);
 
-    if (isNaN(alturaNum) || isNaN(pesoNum) || alturaNum <= 0 || pesoNum <= 0) {
-      setError("Por favor, ingresa valores válidos (positivos y numéricos).");
-      setResultado(null);
-      return;
-    }
-
+    
     try {
       // Usar API_URL en lugar de localhost hardcodeado
-      const response = await axios.post(`${API_URL}/imc/calcular`, {
+      const response = await api.post<ImcResult>(`${API_URL}/imc/calcular`, {
         altura: alturaNum,
         peso: pesoNum,
       });
-      setResultado(response.data);
+      setResultado(response);
       setError("");
     } catch (err) {
       setError(
@@ -51,10 +61,12 @@ function ImcForm() {
             <input
               id="altura"
               type="number"
-              value={altura}
-              onChange={(e) => setAltura(e.target.value)}
+              value={altura} 
+              onChange={(e) => setAltura(e.target.value)}  
               step="0.01"
               min="0.1"
+              required
+              placeholder="Ej: 1.75"
             />
           </div>
           <div>
@@ -62,29 +74,31 @@ function ImcForm() {
             <input
               id="peso"
               type="number"
-              value={peso}
-              onChange={(e) => setPeso(e.target.value)}
+              value={peso} 
+              onChange={(e) => setPeso(e.target.value)}  
               min="1"
+              required
+              placeholder="Ej: 70"
             />
           </div>
           <button type="submit">Calcular</button>
         </form>
-
-        {resultado && (
-          <div>
+    
+        {resultado && (  
+          <div style={{ color: "green", marginTop: "10px" }}>
             <p>IMC: {resultado.imc.toFixed(2)}</p>
             <p>Categoría: {resultado.categoria}</p>
           </div>
         )}
 
-        {error && (
-          <div>
+        {error && ( 
+          <div style={{ color: "red", marginTop: "10px" }}>
             <p>{error}</p>
           </div>
         )}
       </div>
     </div>
-  );
+  ); 
 }
 
 export default ImcForm;
