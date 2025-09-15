@@ -15,12 +15,14 @@ export interface ValidationResult {
     }
   
     // Límites superiores
+    // validation.ts
     if (pesoNum >= 500 || pesoNum <= 0) {
-      return { isValid: false, error: "El peso no puede superar los 500 kg y debe ser positivo." };
+      return { isValid: false, error: "El peso no puede superar los 500 kg." };
     }
     if (alturaNum >= 3 || alturaNum <= 0) {
-      return { isValid: false, error: "La altura no puede superar los 3 metros y debe ser positiva." };
+      return { isValid: false, error: "La altura no puede superar los 3 metros." };
     }
+
   
     return { isValid: true };
   };
