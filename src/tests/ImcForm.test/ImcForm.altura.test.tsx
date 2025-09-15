@@ -1,9 +1,9 @@
 // src/ImcForm.test/ImcForm.altura.test.tsx
 import { render, screen, fireEvent } from "@testing-library/react";
-import ImcForm from "../ImcForm";
-import { validateImcInputs } from "../utils/validation";
+import ImcForm from "../../ImcForm";
+import { validateImcInputs } from "../../utils/validation";
 
-jest.mock("../utils/validation");
+jest.mock("../../utils/validation");
 
 const mockApi = {
   post: jest.fn(),
