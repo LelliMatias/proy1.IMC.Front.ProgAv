@@ -14,7 +14,7 @@ interface ImcFormProps {
 
 function ImcForm({ api }: ImcFormProps) {
 
-  const [altura, setAltura] = useState<string>("");  
+  const [altura, setAltura] = useState<string>("");
   const [peso, setPeso] = useState<string>("");
   const [resultado, setResultado] = useState<ImcResult | null>(null);
   const [error, setError] = useState<string>("");
@@ -22,19 +22,19 @@ function ImcForm({ api }: ImcFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");  
+    setError("");
     setResultado(null);
 
     const validation: ValidationResult = validateImcInputs(altura, peso); // valido los valores con el helper validation.ts
     if (!validation.isValid) {
       setError(validation.error || "Error en la validación.");
-      return;  
+      return;
     }
 
     const alturaNum = parseFloat(altura);
     const pesoNum = parseFloat(peso);
 
-    
+
     try {
       // Usar API_URL en lugar de localhost hardcodeado
       const response = await api.post<ImcResult>(`${API_URL}/imc/calcular`, {
@@ -61,8 +61,8 @@ function ImcForm({ api }: ImcFormProps) {
             <input
               id="altura"
               type="number"
-              value={altura} 
-              onChange={(e) => setAltura(e.target.value)}  
+              value={altura}
+              onChange={(e) => setAltura(e.target.value)}
               step="0.01"
               min="0.1"
               required
@@ -74,8 +74,8 @@ function ImcForm({ api }: ImcFormProps) {
             <input
               id="peso"
               type="number"
-              value={peso} 
-              onChange={(e) => setPeso(e.target.value)}  
+              value={peso}
+              onChange={(e) => setPeso(e.target.value)}
               min="1"
               required
               placeholder="Ej: 70"
@@ -83,22 +83,22 @@ function ImcForm({ api }: ImcFormProps) {
           </div>
           <button type="submit">Calcular</button>
         </form>
-    
-        {resultado && (  
+
+        {resultado && (
           <div style={{ color: "green", marginTop: "10px" }}>
             <p>IMC: {resultado.imc.toFixed(2)}</p>
             <p>Categoría: {resultado.categoria}</p>
           </div>
         )}
 
-        {error && ( 
+        {error && (
           <div style={{ color: "red", marginTop: "10px" }}>
             <p>{error}</p>
           </div>
         )}
       </div>
     </div>
-  ); 
+  );
 }
 
 export default ImcForm;
